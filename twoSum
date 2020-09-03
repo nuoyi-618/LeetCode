@@ -1,0 +1,26 @@
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        """
+        遍历数组，如果（目标数-num1）在数组中存在则返回下标。排除特殊情况目标值是num1的两倍。
+        技巧：1-in 在数组中寻找
+        2-nums.index(x,i+1)在i+1之后寻找
+        """
+        lens=len(nums)
+        j=-1
+        for i in range(lens):
+            if (target-nums[i]) in nums:
+                if (nums.count(nums[i])==1)&(target-nums[i]==nums[i]):
+#如果num2=num1,且nums中只出现了一次，说明找到是num1本身。特殊情况，target=2num1
+                    continue
+                else:
+                    j=nums.index(target-nums[i],i+1)#index(x,i+1)是从num1后的序列中找num2，一定是先找到num1，再遇到num2       
+                    break
+        if j>0:
+            return [i,j]
+        else:
+            []
