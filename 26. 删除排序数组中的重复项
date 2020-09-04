@@ -1,0 +1,22 @@
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        """
+        思路1：如果Nums[i]出现次数大于1 则删除
+        for i in range(len(nums)-1,0,-1):
+           if nums.count(nums[i])>1:
+               nums.pop(i)
+        思路2：双指针
+        i代表储存的位置，j遍历数组，如果i与j不同，则存入i+1，如果相同i不变,j+1
+        tips:删除数组nums.pop(i) / nums.remove(nums[i]) i为下标
+        """
+        i=0
+        j=1
+        for j in range(1,len(nums)):
+            if nums[i]!=nums[j]:
+                nums[i+1]=nums[j]
+                i+=1
+        return i+1
