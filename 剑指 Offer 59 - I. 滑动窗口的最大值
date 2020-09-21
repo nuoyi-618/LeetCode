@@ -1,0 +1,26 @@
+class Solution(object):
+    def maxSlidingWindow(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        队列递减，存储窗口内元素
+        如果窗口当前最大元素是最左侧元素，下一步将删除最左侧的
+        加入新的元素
+        """
+        deque = collections.deque()
+        res,n=[],len(nums)
+        for i,j in zip(range(1-k,n-k+1),range(n)):
+            #zip(range(), range()) 可实现滑动窗口的左右边界 i, j 同时遍历。
+            if i>0 and deque[0]==nums[i-1]:
+                #如果窗口内最大元素是最左侧元素
+                deque.popleft()
+                #删除元素
+            while deque and deque[-1]<nums[j]:
+                #如果队列中最小元素比新进值小，抛出
+                deque.pop()
+            deque.append(nums[j])
+            #加入新数据
+            if i >=0:
+                res.append(deque[0])
+        return res
